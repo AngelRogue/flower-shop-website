@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Blossom Delight Floral Management</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-light">
+
+    <!-- Responsive Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-boutique sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="logo-icon">🌸</span> Blossom Delight
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Shop Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">Shopping Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="admin.html">Admin Dashboard</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="cart.html" class="btn btn-boutique-outline position-relative px-3 py-2">
+                        <i class="fa-solid fa-basket-shopping me-1"></i> Cart
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill cart-badge cart-badge-count">0</span>
+                    </a>
+                    <a href="products.html" class="btn btn-boutique-primary btn-sm px-3 py-2">
+                        <i class="fa-solid fa-store me-1"></i> View Storefront
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="py-4">
+        <div class="container">
+
+            <!-- Admin Header -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+                <div>
+                    <span class="badge bg-secondary-subtle text-secondary px-3 py-2 rounded-pill small fw-bold text-uppercase">
+                        <i class="fa-solid fa-user-shield me-1"></i> Local Admin Panel
+                    </span>
+                    <h1 class="display-6 fw-bold mt-2 mb-1">Product Inventory & Management</h1>
+                    <p class="text-muted small mb-0">Add, edit, inspect, and remove items stored inside browser localStorage.</p>
+                </div>
+                <div class="d-flex gap-2">
+                    <button id="btn-reset-defaults" class="btn btn-outline-secondary btn-sm rounded-pill px-3 py-2" title="Restore sample mock catalog">
+                        <i class="fa-solid fa-rotate-left me-1"></i> Reset Sample Data
+                    </button>
+                    <a href="#add-product-card" class="btn btn-boutique-primary btn-sm rounded-pill px-3 py-2">
+                        <i class="fa-solid fa-plus me-1"></i> Add New Product
+                    </a>
+                </div>
+            </div>
+
+            <!-- Stats Overview Cards -->
+            <div class="row g-3 mb-4">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card admin-stat-card p-3 bg-white h-100 border">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="text-muted small fw-semibold text-uppercase">Total Flowers</span>
+                                <h3 class="fw-bold my-1 text-dark" id="stat-total-products">0</h3>
+                                <span class="small text-success"><i class="fa-solid fa-circle-check me-1"></i> Active in Catalog</span>
+                            </div>
+                            <div class="p-3 rounded-circle bg-danger-subtle text-danger fs-4">
+                                <i class="fa-solid fa-spa"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card admin-stat-card p-3 bg-white h-100 border">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="text-muted small fw-semibold text-uppercase">Categories</span>
+                                <h3 class="fw-bold my-1 text-dark" id="stat-total-categories">0</h3>
+                                <span class="small text-secondary"><i class="fa-solid fa-tags me-1"></i> Distinct Groups</span>
+                            </div>
+                            <div class="p-3 rounded-circle bg-success-subtle text-success fs-4">
+                                <i class="fa-solid fa-list-check"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card admin-stat-card p-3 bg-white h-100 border">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="text-muted small fw-semibold text-uppercase">Average Price</span>
+                                <h3 class="fw-bold my-1 text-dark" id="stat-avg-price">$0.00</h3>
+                                <span class="small text-muted"><i class="fa-solid fa-chart-line me-1"></i> Per floral unit</span>
+                            </div>
+                            <div class="p-3 rounded-circle bg-warning-subtle text-warning-emphasis fs-4">
+                                <i class="fa-solid fa-dollar-sign"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card admin-stat-card p-3 bg-white h-100 border">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="text-muted small fw-semibold text-uppercase">Items In Cart</span>
+                                <h3 class="fw-bold my-1 text-dark" id="stat-cart-items">0</h3>
+                                <span class="small text-primary"><i class="fa-solid fa-cart-shopping me-1"></i> Local shopper state</span>
+                            </div>
+                            <div class="p-3 rounded-circle bg-primary-subtle text-primary fs-4">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Product Form Card -->
+            <div id="add-product-card" class="card border-0 shadow-sm rounded-4 mb-4 bg-white">
+                <div class="card-header bg-white border-bottom py-3 px-4">
+                    <div class="d-flex align-items-center gap-2">
+                        <div class="bg-danger text-white rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                            <i class="fa-solid fa-plus small"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-0">Add New Flower Product</h5>
+                            <small class="text-muted">Enter product details to instantly publish to the shop catalog</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <form id="add-product-form" class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold small">Product Name <span class="text-danger">*</span></label>
+                            <input type="text" id="add-product-name" class="form-control" placeholder="e.g. White Princess Lily" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label fw-semibold small">Price ($) <span class="text-danger">*</span></label>
+                            <input type="number" step="0.01" min="0" id="add-product-price" class="form-control" placeholder="39.99" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-semibold small">Category <span class="text-danger">*</span></label>
+                            <select id="add-product-category" class="form-select" required>
+                                <option value="" disabled selected>Select category...</option>
+                                <option value="Roses">Roses</option>
+                                <option value="Tulips">Tulips</option>
+                                <option value="Bouquets">Bouquets</option>
+                                <option value="Orchids">Orchids</option>
+                                <option value="Sunflowers">Sunflowers</option>
+                                <option value="Seasonal">Seasonal Specials</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label fw-semibold small">Image URL</label>
+                            <input type="url" id="add-product-image" class="form-control" placeholder="https://images.unsplash.com/...">
+                        </div>
+                        <div class="col-md-10">
+                            <label class="form-label fw-semibold small">Description</label>
+                            <input type="text" id="add-product-description" class="form-control" placeholder="Brief summary of floral stems, foliage, occasion, or fragrance notes">
+                        </div>
+                        <div class="col-md-2 d-flex align-items-center pt-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="add-product-featured">
+                                <label class="form-check-label small fw-semibold" for="add-product-featured">
+                                    Featured on Home
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 text-end pt-2">
+                            <button type="reset" class="btn btn-light rounded-pill px-4 me-2">Clear Form</button>
+                            <button type="submit" id="btn-save-new-product" class="btn btn-boutique-primary rounded-pill px-4">
+                                <i class="fa-solid fa-plus me-1"></i> Save Product
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Product Management Table Card -->
+            <div class="card border-0 shadow-sm rounded-4 bg-white overflow-hidden mb-5">
+                <div class="card-header bg-white border-bottom py-3 px-4 d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+                    <h5 class="fw-bold mb-0">Product Catalog Inventory</h5>
+                    <div class="w-auto" style="min-width: 260px;">
+                        <input type="text" id="admin-table-search" class="form-control form-control-sm bg-light" placeholder="Search table items...">
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col" style="width: 80px;">Thumbnail</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Description</th>
+                                <th scope="col" class="text-end" style="width: 120px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-products-table-body">
+                            <!-- Populated dynamically via admin.js -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="admin-empty-table" class="p-5 text-center d-none">
+                    <p class="text-muted mb-0">No floral products found in inventory. Add one above or reset sample data.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Edit Product Modal -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-bottom py-3 px-4">
+                    <h5 class="modal-title fw-bold" id="editProductModalLabel">
+                        <i class="fa-solid fa-pen-to-square me-2 text-danger"></i>Edit Flower Product
+                    </h5>
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="edit-product-form">
+                    <input type="hidden" id="edit-product-id">
+                    <div class="modal-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold small">Product Name <span class="text-danger">*</span></label>
+                                <input type="text" id="edit-product-name" class="form-control" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold small">Price ($) <span class="text-danger">*</span></label>
+                                <input type="number" step="0.01" min="0" id="edit-product-price" class="form-control" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-semibold small">Category <span class="text-danger">*</span></label>
+                                <select id="edit-product-category" class="form-select" required>
+                                    <option value="Roses">Roses</option>
+                                    <option value="Tulips">Tulips</option>
+                                    <option value="Bouquets">Bouquets</option>
+                                    <option value="Orchids">Orchids</option>
+                                    <option value="Sunflowers">Sunflowers</option>
+                                    <option value="Seasonal">Seasonal Specials</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold small">Image URL</label>
+                                <input type="url" id="edit-product-image" class="form-control">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label fw-semibold small">Description</label>
+                                <textarea id="edit-product-description" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="edit-product-featured">
+                                    <label class="form-check-label small fw-semibold" for="edit-product-featured">
+                                        Feature this arrangement on the homepage
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top py-3 px-4">
+                        <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" id="btn-save-edit-product" class="btn btn-boutique-primary rounded-pill px-4">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boutique Footer -->
+    <footer class="boutique-footer py-4 mt-auto">
+        <div class="container text-center text-white-50 small">
+            <p class="mb-0">&copy; 2026 Blossom Delight Flower Shop. Local Admin Management Console.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Shared Utility Script -->
+    <script src="assets/js/util.js"></script>
+    <!-- Admin Script -->
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>
