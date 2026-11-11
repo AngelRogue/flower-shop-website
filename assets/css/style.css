@@ -1,0 +1,351 @@
+/* ==========================================================================
+   Blossom Delight - Floral Boutique Theme & Custom Styles
+   Soft pinks, sage & deep forest greens, crisp warm whites, elegant typography
+   ========================================================================== */
+
+:root {
+    --primary-color: #d63384;        /* Rose pink */
+    --primary-dark: #b02a6b;         /* Deep rose */
+    --primary-light: #fbeaf0;        /* Soft blush */
+    --secondary-color: #2d5a43;      /* Deep forest / sage green */
+    --secondary-light: #eaf2ed;      /* Soft sage tint */
+    --accent-gold: #c59b27;          /* Soft gold accent */
+    --bg-creamy: #fdfbf7;            /* Creamy boutique background */
+    --text-dark: #23272a;            /* Crisp dark charcoal */
+    --text-muted: #6c757d;
+    --border-color: #eedcdb;
+    --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    --card-shadow-hover: 0 15px 35px rgba(214, 51, 132, 0.15);
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Base styling */
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    background-color: var(--bg-creamy);
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+h1, h2, h3, h4, .brand-font {
+    font-family: 'Playfair Display', Georgia, serif;
+    letter-spacing: -0.02em;
+}
+
+/* Navbar */
+.navbar-boutique {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.55rem;
+    color: var(--secondary-color) !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navbar-brand .logo-icon {
+    color: var(--primary-color);
+    font-size: 1.6rem;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--text-dark) !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 20px;
+    transition: var(--transition);
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-color) !important;
+    background-color: var(--primary-light);
+}
+
+/* Badge styling */
+.cart-badge {
+    background-color: var(--primary-color) !important;
+    font-size: 0.75rem;
+    padding: 0.35em 0.65em;
+}
+
+/* Buttons */
+.btn-boutique-primary {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    font-weight: 600;
+    padding: 0.6rem 1.4rem;
+    border-radius: 30px;
+    transition: var(--transition);
+}
+
+.btn-boutique-primary:hover,
+.btn-boutique-primary:focus {
+    background-color: var(--primary-dark);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(214, 51, 132, 0.25);
+}
+
+.btn-boutique-secondary {
+    background-color: var(--secondary-color);
+    color: #ffffff;
+    border: none;
+    font-weight: 600;
+    padding: 0.6rem 1.4rem;
+    border-radius: 30px;
+    transition: var(--transition);
+}
+
+.btn-boutique-secondary:hover,
+.btn-boutique-secondary:focus {
+    background-color: #214332;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(45, 90, 67, 0.25);
+}
+
+.btn-boutique-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+    padding: 0.55rem 1.3rem;
+    border-radius: 30px;
+    transition: var(--transition);
+}
+
+.btn-boutique-outline:hover,
+.btn-boutique-outline.active {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border-color: var(--primary-color);
+}
+
+/* Hero Section */
+.hero-boutique {
+    position: relative;
+    background: linear-gradient(135deg, rgba(45, 90, 67, 0.85), rgba(214, 51, 132, 0.75)),
+                url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+    min-height: 520px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    border-radius: 0 0 30px 30px;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+/* Product Cards */
+.flower-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.flower-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--primary-light);
+}
+
+.flower-card .card-img-wrap {
+    position: relative;
+    overflow: hidden;
+    height: 230px;
+    background-color: #f8f9fa;
+}
+
+.flower-card .card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.flower-card:hover .card-img-wrap img {
+    transform: scale(1.08);
+}
+
+.category-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--secondary-color);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.flower-card .card-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-price {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+
+/* Feature & Benefit cards */
+.benefit-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 1.8rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    text-align: center;
+}
+
+.benefit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.benefit-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin: 0 auto 1rem;
+}
+
+/* Cart Page */
+.cart-table th {
+    background-color: var(--secondary-light);
+    color: var(--secondary-color);
+    font-weight: 600;
+    border-top: none;
+}
+
+.cart-item-img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.qty-control {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #ced4da;
+    border-radius: 20px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.qty-btn {
+    background: none;
+    border: none;
+    padding: 0.35rem 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.qty-btn:hover {
+    background: var(--primary-light);
+    color: var(--primary-color);
+}
+
+.qty-input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    font-weight: 600;
+}
+
+.order-summary-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--card-shadow);
+}
+
+/* Admin Dashboard */
+.admin-stat-card {
+    border-radius: 16px;
+    border: none;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+}
+
+.admin-stat-card:hover {
+    transform: translateY(-3px);
+}
+
+.admin-thumbnail {
+    width: 54px;
+    height: 54px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Toast alert notification container */
+.toast-container-custom {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1090;
+}
+
+/* Footer */
+footer.boutique-footer {
+    background-color: var(--secondary-color);
+    color: #ffffff;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 4rem;
+}
+
+footer a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+footer a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Custom scrollbars and helpers */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

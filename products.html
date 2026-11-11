@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floral Catalog & Shop - Blossom Delight</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <!-- Responsive Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-boutique sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="logo-icon">🌸</span> Blossom Delight
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="products.html">Shop Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">Shopping Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin.html">Admin Dashboard</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <a href="cart.html" class="btn btn-boutique-outline position-relative px-3 py-2">
+                        <i class="fa-solid fa-basket-shopping me-1"></i> Cart
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill cart-badge cart-badge-count">0</span>
+                    </a>
+                    <a href="admin.html" class="btn btn-outline-secondary btn-sm px-3 py-2 rounded-pill">
+                        <i class="fa-solid fa-gear me-1"></i> Admin
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="py-5">
+        <div class="container">
+
+            <!-- Catalog Header Banner -->
+            <div class="p-4 p-md-5 mb-4 rounded-4 bg-white shadow-sm border text-center">
+                <span class="text-uppercase fw-bold text-muted small tracking-wide">Artisan Floral Selection</span>
+                <h1 class="display-5 fw-bold mb-2">Our Fresh Flower Catalog</h1>
+                <p class="text-muted max-w-700 mx-auto mb-0">
+                    Handcrafted bouquets, exotic orchids, classic roses, and cheerful seasonal blooms. Filter by category or search your favorite flowers.
+                </p>
+            </div>
+
+            <!-- Controls: Category Pills, Search, and Sort -->
+            <div class="card border-0 shadow-sm p-4 mb-4 rounded-4 bg-white">
+                <div class="row g-3 align-items-center">
+
+                    <!-- Search input -->
+                    <div class="col-lg-4">
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0">
+                                <i class="fa-solid fa-magnifying-glass text-muted"></i>
+                            </span>
+                            <input type="text" id="product-search-input" class="form-control border-start-0 bg-light" placeholder="Search by name, flower type, or keyword...">
+                        </div>
+                    </div>
+
+                    <!-- Category filter buttons -->
+                    <div class="col-lg-5">
+                        <div class="d-flex flex-wrap gap-2 justify-content-lg-center">
+                            <button type="button" class="btn btn-sm btn-boutique-primary category-filter-btn active" data-category="all">All</button>
+                            <button type="button" class="btn btn-sm btn-boutique-outline category-filter-btn" data-category="Roses">Roses</button>
+                            <button type="button" class="btn btn-sm btn-boutique-outline category-filter-btn" data-category="Tulips">Tulips</button>
+                            <button type="button" class="btn btn-sm btn-boutique-outline category-filter-btn" data-category="Bouquets">Bouquets</button>
+                            <button type="button" class="btn btn-sm btn-boutique-outline category-filter-btn" data-category="Orchids">Orchids</button>
+                        </div>
+                    </div>
+
+                    <!-- Sort select -->
+                    <div class="col-lg-3 text-lg-end">
+                        <select id="product-sort-select" class="form-select form-select-sm w-auto d-inline-block">
+                            <option value="default">Sort by: Default</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="name-asc">Alphabetical: A to Z</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Count display -->
+            <div class="d-flex justify-content-between align-items-center mb-4 px-1">
+                <span id="results-count" class="text-muted small fw-semibold">Showing floral items</span>
+                <span class="text-muted small"><i class="fa-solid fa-truck-fast text-success me-1"></i> Free delivery on orders over $50</span>
+            </div>
+
+            <!-- Dynamic Product Grid -->
+            <div class="row g-4" id="products-catalog-grid">
+                <!-- Javascript will dynamically render product cards here -->
+            </div>
+
+            <!-- Empty State Display -->
+            <div id="catalog-empty-state" class="text-center py-5 d-none">
+                <div class="p-5 bg-white rounded-4 shadow-sm border max-w-700 mx-auto">
+                    <div class="fs-1 text-muted mb-3">🔍</div>
+                    <h4 class="fw-bold mb-2">No Flowers Found</h4>
+                    <p class="text-muted mb-4">We couldn't find any floral products matching your current filters or search term.</p>
+                    <button class="btn btn-boutique-primary" onclick="resetFilters()">
+                        <i class="fa-solid fa-rotate-left me-1"></i> Reset Filters
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Boutique Footer -->
+    <footer class="boutique-footer py-5">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="fs-3">🌸</span>
+                        <h4 class="brand-font mb-0 text-white">Blossom Delight</h4>
+                    </div>
+                    <p class="text-white-50 small mb-3">
+                        Modern floral boutique delivering emotions, celebrations, and thoughtful arrangements crafted with love and sustainably sourced blooms.
+                    </p>
+                </div>
+                <div class="col-6 col-lg-2 offset-lg-1">
+                    <h6 class="fw-bold text-white mb-3 text-uppercase">Shop</h6>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 mb-0">
+                        <li><a href="products.html">All Flowers</a></li>
+                        <li><a href="products.html">Roses</a></li>
+                        <li><a href="products.html">Tulips</a></li>
+                        <li><a href="products.html">Bouquets</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="fw-bold text-white mb-3 text-uppercase">Quick Links</h6>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 mb-0">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="cart.html">Shopping Cart</a></li>
+                        <li><a href="admin.html">Admin Dashboard</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h6 class="fw-bold text-white mb-3 text-uppercase">Delivery Promise</h6>
+                    <p class="text-white-50 small mb-2">Temperature-controlled packaging keeps your petals pristine and hydrated.</p>
+                    <span class="badge bg-light text-dark px-3 py-2 rounded-pill small">100% Happiness Guarantee</span>
+                </div>
+            </div>
+            <div class="border-top border-white border-opacity-10 pt-4 text-center text-white-50 small">
+                <p class="mb-0">&copy; 2026 Blossom Delight Flower Shop. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Shared Utility Script -->
+    <script src="assets/js/util.js"></script>
+    <!-- Shop Script -->
+    <script src="assets/js/shop.js"></script>
+
+    <script>
+        function resetFilters() {
+            const searchInput = document.getElementById('product-search-input');
+            if (searchInput) searchInput.value = '';
+            currentSearchTerm = '';
+
+            const filterButtons = document.querySelectorAll('.category-filter-btn');
+            filterButtons.forEach(b => {
+                b.classList.remove('active', 'btn-boutique-primary');
+                b.classList.add('btn-boutique-outline');
+            });
+            const allBtn = document.querySelector('.category-filter-btn[data-category="all"]');
+            if (allBtn) {
+                allBtn.classList.add('active', 'btn-boutique-primary');
+                allBtn.classList.remove('btn-boutique-outline');
+            }
+            currentCategory = 'all';
+
+            const sortSelect = document.getElementById('product-sort-select');
+            if (sortSelect) sortSelect.value = 'default';
+            currentSort = 'default';
+
+            renderCatalog();
+        }
+
+        // Handle URL category parameter if navigated from home page
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const catParam = params.get('category');
+            if (catParam) {
+                const targetBtn = document.querySelector(`.category-filter-btn[data-category="${catParam}"]`);
+                if (targetBtn) {
+                    targetBtn.click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
